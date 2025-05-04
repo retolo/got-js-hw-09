@@ -15,6 +15,14 @@ input.addEventListener('input', handleInput);
 textArea.addEventListener('input', handleTextArea);
 
 
+const valueStorage = localStorage.getItem(storageKey);
+const parc = JSON.parse(valueStorage);
+if(parc.email !== '' || parc.message !== ''){
+    input.value = parc.email;
+    textArea.textContent = parc.message;
+}
+
+
 
 function handleForm(event){
     event.preventDefault();
@@ -24,8 +32,17 @@ function handleForm(event){
     const makeJson = JSON.stringify(formData)
     localStorage.setItem(storageKey, makeJson);
 
+    
 
-    form.reset();
+
+    if(formData.email === '' || formData.message === '')
+        alert('Fill please all fields');
+
+    else{
+        form.reset();
+        
+    }
+    
 
 
 }
@@ -35,7 +52,7 @@ function handleInput(event){
     const email = event.target.value;
 
     formData.email = email;
-    console.log(formData);
+   
     
     
 }
@@ -44,7 +61,7 @@ function handleTextArea(event){
     const message = event.currentTarget.value;
 
     formData.message = message;
-    console.log(formData);
+    
 }
 
 
