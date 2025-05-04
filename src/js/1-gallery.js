@@ -101,19 +101,14 @@ const images = [
     ul.insertAdjacentHTML('afterbegin', markUp);
 
     
+    const lightBox = new SimpleLightbox('.gallery a', {
+        captions: true,
+        captionsData: 'alt',
+        captionDelay: 250,
+        captionPosition: 'bottom',
+    })
     
-    function onUlClick(event){
-      
-      event.preventDefault();
-
-      const clickedImage = event.target.closest('img');
-
-      if(!clickedImage){
-        return;
-      }
-
-      
-    }
+   
     
     
 
