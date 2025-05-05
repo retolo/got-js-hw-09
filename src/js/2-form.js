@@ -11,8 +11,9 @@ const formData = {
 }
 
 form.addEventListener('submit', handleForm);
-input.addEventListener('input', handleInput);
-textArea.addEventListener('input', handleTextArea);
+form.addEventListener('input', handleInputForm);
+// input.addEventListener('input', handleInput);
+// textArea.addEventListener('input', handleTextArea);
 
 
 const valueStorage = localStorage.getItem(storageKey);
@@ -32,33 +33,17 @@ function handleForm(event){
 
     
     
-    
-    
-
-    
-
-
-    if(input.value.trim() === '' || textArea.value.trim() === ''){
-        alert('Fill please all fields');
-    }
-
-    const makeJson = JSON.stringify(formData)
-    localStorage.removeItem(storageKey);
-    console.log(localStorage.getItem(storageKey));
-
-    
-
-    
-    
-
-    
-    
-    
-    
     try {
-        setTimeout(() => {
-            localStorage.setItem(storageKey, makeJson);
-        }, 7000); 
+        if(input.value.trim() === '' || textArea.value.trim() === ''){
+            alert('Fill please all fields');
+        }
+
+        console.log(formData);
+        
+        form.reset();
+    
+        
+         
         
     } catch (error) {
         alert(error.message);
@@ -67,31 +52,41 @@ function handleForm(event){
         
         
     
-    console.log(formData);
-    form.reset();
+    
     
 
 
 }
 
 
-function handleInput(event){
+// function handleInput(event){
     
-    const email = event.target.value;
+//     const email = event.target.value;
 
-    formData.email = email;
+//     formData.email = email;
    
     
     
-}
+// }
 
-function handleTextArea(event){
-    const message = event.currentTarget.value;
+// function handleTextArea(event){
+//     const message = event.currentTarget.value;
 
-    formData.message = message;
+//     formData.message = message;
     
-}
+// }
 
+
+function handleInputForm(){
+    const email = document.querySelector('input').value;
+    const message = document.querySelector('textarea').value;
+
+    formData.email = email;
+    formData.message = message;
+    localStorage.setItem(storageKey, JSON.stringify(formData));
+    
+
+}
 
 
 
