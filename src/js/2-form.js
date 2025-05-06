@@ -17,9 +17,12 @@ form.addEventListener('input', handleInputForm);
 
 const valueStorage = localStorage.getItem(storageKey);
 const parc = JSON.parse(valueStorage);
-if(parc && parc.email  && parc.message){
+if(parc.email !== ''  || parc.message !== ''){
     input.value = parc.email;
     textArea.value = parc.message;
+    formData.email = parc.email;
+    formData.message = parc.message;
+    
 }
 
 
@@ -38,7 +41,6 @@ function handleForm(event){
     }
     else if(input.value.trim() !== '' && textArea.value.trim() !== ''){
           console.log(formData);
-          localStorage.removeItem(storageKey);
     } 
     
 
@@ -47,7 +49,6 @@ function handleForm(event){
     
     
     try {
-        localStorage.setItem(storageKey, JSON.stringify(formData));
 
         
 
