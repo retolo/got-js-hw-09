@@ -36,11 +36,12 @@ function handleForm(event){
     try {
         if(input.value.trim() === '' || textArea.value.trim() === ''){
             alert('Fill please all fields');
+            console.log(formData);
+        
+            form.reset();
         }
 
-        console.log(formData);
         
-        form.reset();
     
         
          
