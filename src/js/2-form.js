@@ -7,13 +7,12 @@ const storageKey = "feedback-form-state";
 
 const formData = {
     email: '',
-    message: ''
+    message: '',
 }
 
 form.addEventListener('submit', handleForm);
 form.addEventListener('input', handleInputForm);
-// input.addEventListener('input', handleInput);
-// textArea.addEventListener('input', handleTextArea);
+
 
 
 const valueStorage = localStorage.getItem(storageKey);
@@ -31,21 +30,31 @@ function handleForm(event){
 
     const form = event.currentTarget;
 
+
+    if(input.value.trim() === '' || textArea.value.trim() === ''){
+        alert('Fill please all fields');
+        return;
+        
+    }
+    else if(input.value.trim() !== '' && textArea.value.trim() !== ''){
+          console.log(formData);
+          localStorage.removeItem(storageKey);
+    } 
+    
+
+    
+
     
     
     try {
-        if(input.value.trim() === '' || textArea.value.trim() === ''){
-            alert('Fill please all fields');
-            console.log(formData);
-        
-            form.reset();
-        }
+        localStorage.setItem(storageKey, JSON.stringify(formData));
 
         
+
+        form.reset();
+        
+        
     
-        
-         
-        
     } catch (error) {
         alert(error.message);
         
@@ -78,12 +87,13 @@ function handleForm(event){
 // }
 
 
-function handleInputForm(){
-    const email = document.querySelector('input').value;
-    const message = document.querySelector('textarea').value;
+function handleInputForm(event){
+    const {name, value} = event.target;
 
-    formData.email = email;
-    formData.message = message;
+    if(name === 'email' || name === 'message'){
+        formData[name] = value.trim();
+
+    }
     localStorage.setItem(storageKey, JSON.stringify(formData));
     
 
