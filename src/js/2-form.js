@@ -17,11 +17,13 @@ form.addEventListener('input', handleInputForm);
 
 const valueStorage = localStorage.getItem(storageKey);
 const parc = JSON.parse(valueStorage);
-if(parc.email !== ''  || parc.message !== ''){
+
+if(parc !== null && parc !== undefined){
     input.value = parc.email;
     textArea.value = parc.message;
     formData.email = parc.email;
     formData.message = parc.message;
+    
     
 }
 
@@ -53,6 +55,11 @@ function handleForm(event){
         
 
         form.reset();
+        formData.email = '';
+        formData.message = '';
+        localStorage.removeItem(storageKey);
+        
+        
         
         
     
